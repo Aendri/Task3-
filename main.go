@@ -58,7 +58,7 @@ func filteredCountriesByRegion(region string) []Countries {
 
 func main() {
 	router := mux.NewRouter()
-	filepath := "countries.json"
+	filepath := "/Users/aendri/Downloads/countries.json"
 
 	err := Loadcountriesname(filepath)
 	if err != nil {
