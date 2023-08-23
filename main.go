@@ -50,7 +50,7 @@ func Loadcountriesname(db *sql.DB, filepath string) error {
 			log.Fatal(err)
 		}
 	}
-	fmt.Println("Dta entered succesfully")
+	fmt.Println("Data entered succesfully")
 	return nil
 
 }
