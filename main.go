@@ -10,7 +10,8 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	_ "github.com/mattn/go-sqlite3"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 type Countries struct {
@@ -31,13 +32,11 @@ func CreateTable(db *sql.DB) {
 }
 
 func Loadcountriesname(db *sql.DB, filepath string) error {
-
+	var countries []Countries
 	data, err := os.ReadFile(filepath)
 	if err != nil {
 		return err
 	}
-
-	var countries []Countries
 
 	err = json.Unmarshal(data, &countries)
 	if err != nil {
@@ -90,7 +89,9 @@ func Getcountries(db *sql.DB) http.HandlerFunc {
 
 func main() {
 
-	db, err := sql.Open("sqlite3", "countries.db")
+	connectionstring := "root@tcp(localhost:3306)/test"
+
+	db, err := sql.Open("mysql", connectionstring)
 	if err != nil {
 		log.Fatal(err)
 	}
